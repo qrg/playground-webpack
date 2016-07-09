@@ -24,6 +24,11 @@ export default {
         }
       }
     ]
+  },
+
+  devServer: {
+    contentBase: 'public',
+    port: 3000
   }
 
 }
