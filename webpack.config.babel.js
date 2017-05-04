@@ -14,14 +14,11 @@ export default {
   },
   
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015']
-        }
+        use: ['babel-loader']
       }
     ]
   },
