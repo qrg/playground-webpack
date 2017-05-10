@@ -1,6 +1,9 @@
 import path from 'path';
 
-import webpack from 'webpack';
+import CleanPlugin from 'clean-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
+
+const DIST = path.join(__dirname, 'public');
 
 export default {
 
@@ -9,10 +12,10 @@ export default {
   output: {
     publicPath: '/',
     sourcePrefix: '  ',
-    path: path.join(__dirname, 'public'),
+    path: DIST,
     filename: 'bundle.js'
   },
-  
+
   module: {
     rules: [
       {
@@ -23,8 +26,21 @@ export default {
     ]
   },
 
+  plugins: [
+    new CleanPlugin(
+      ['public/**/*.*'],
+      {watch: true}
+    ),
+    new CopyPlugin([
+      {
+        from: 'src/index.html',
+        to: ''
+      }
+    ])
+  ],
+
   devServer: {
-    contentBase: 'public',
+    contentBase: DIST,
     port: 3000
   }
 
