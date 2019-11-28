@@ -1,13 +1,14 @@
 import path from 'path';
 
-import CleanPlugin from 'clean-webpack-plugin';
-import CopyPlugin from 'copy-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 const DIST = path.join(__dirname, 'public');
 
 export default {
 
   entry: './src/entry.js',
+  mode: 'development',
 
   output: {
     publicPath: '/',
@@ -27,11 +28,8 @@ export default {
   },
 
   plugins: [
-    new CleanPlugin(
-      ['public/**/*.*'],
-      {watch: true}
-    ),
-    new CopyPlugin([
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([
       {
         from: 'src/index.html',
         to: ''
